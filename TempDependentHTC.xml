@@ -1,0 +1,64 @@
+<extension version="1" name="TempDependentHTC">
+  <guid shortid="TempDependentHTC">C8CE2B4A-7D83-49CB-9951-4E6DD6E5E15E</guid>
+  <script src="script.py" />
+  
+  <interface context="Mechanical">
+    <images>images</images>
+
+    <toolbar name="TempDependentHTC" caption="Temperature dependent HTC ">
+      <entry name="EntryHTC" icon="HTCicon">
+	<callbacks>
+	  <!-- This Python function is called when clicked -->
+	  <onclick>EntryHTCClicked</onclick>
+	</callbacks>
+      </entry>
+    </toolbar>
+        
+  </interface>
+
+  <simdata context="Mechanical">
+    
+    <load name="HTCLoad" version="1" caption="HTC Load"
+	  icon="HTCicon" issupport="false" isload="true" color="#0000FF">
+	  
+      <callbacks>
+        	<getsolvecommands>writeLoadCommands</getsolvecommands>
+      </callbacks>
+
+      <callbacks>
+		<action name="CheckingData" caption="Check data">ActionCheckData</action>
+      </callbacks>
+	      
+	         
+      <propertygroup name="SelectGeo" caption="Selecting Geometry" display="caption">
+      	<propertygroup name="SelectDimension" caption="Dimension" display="property" control="select"
+      	 default="3d">
+      		<attributes options="3d,2d" />
+      		<property name="GeoHTC_Face" caption="Select Face" visibleon="3d" control="scoping" default="">
+      			<attributes selection_filter="face" />
+      		</property>
+		<property name="GeoHTC_Edge" caption="Selecting Edge" visibleon="2d" control="scoping" default="">
+      			<attributes selection_filter="edge" />
+       		</property>   	
+      	</propertygroup>
+      </propertygroup>         
+         
+      <propertygroup name="SelectData" caption="Select Heat Flux Data" display="caption">
+      	<propertygroup name="MethodSelect" caption="Select Method" display="property" control="select"
+      	 default="3 points">
+      		<attributes options="3 points,2 points" />
+      		<property name="filename01" caption="Heat Flux file 1" visibleon="3 points|2 points" control="fileopen">
+		</property>		
+		<property name="filename02" caption="Heat Flux file 2" visibleon="3 points|2 points" control="fileopen" />
+		<property name="filename03" caption="Heat Flux file 3" visibleon="3 points" control="fileopen" />		      		           		
+      	</propertygroup>
+      </propertygroup>
+      
+
+      
+    </load>
+    
+  </simdata>
+
+  
+</extension>
